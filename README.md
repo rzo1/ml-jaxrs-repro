@@ -1,4 +1,15 @@
-# Case 1
+# Case 2
+
+```java
+package com.github.rzo1;
+
+import jakarta.ws.rs.ApplicationPath;
+import jakarta.ws.rs.core.Application;
+
+@ApplicationPath("myapp")
+public class MyApp extends Application {
+}
+```
 
 ```java
 package com.github.rzo1;
@@ -17,44 +28,19 @@ public class MyResource {
 }
 ```
 
-with `web.xml`:
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-
-    <display-name>demo-jaxrs</display-name>
-
-    <servlet>
-
-        <servlet-name>jakarta.ws.rs.core.Application</servlet-name>
-
-    </servlet>
-
-    <servlet-mapping>
-
-        <servlet-name>jakarta.ws.rs.core.Application</servlet-name>
-
-        <url-pattern>/myapp/*</url-pattern>
-
-    </servlet-mapping>
-</web-app>
-
-```
+with **no** `web.xml`
 
 yields log output:
 
 ```bash
-02-Apr-2024 20:16:38.994 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints REST Application: http://localhost:8282/myapp                -> org.apache.openejb.config.AnnotationDeployer$ProvidedJAXRSApplication@7a023e34
-02-Apr-2024 20:16:38.996 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints      Service URI: http://localhost:8282/myapp/health         -> Pojo org.apache.tomee.microprofile.health.MicroProfileHealthChecksEndpoint
-02-Apr-2024 20:16:38.997 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/health         ->      Response getChecks()       
-02-Apr-2024 20:16:38.997 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/health/live    ->      Response getLiveChecks()   
-02-Apr-2024 20:16:38.997 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/health/ready   ->      Response getReadyChecks()  
-02-Apr-2024 20:16:38.997 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/health/started ->      Response getStartedChecks()
-02-Apr-2024 20:16:38.997 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints      Service URI: http://localhost:8282/myapp/myresource     -> Pojo com.github.rzo1.MyResource                                           
-02-Apr-2024 20:16:38.997 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/myresource     ->      Response test()
-
+02-Apr-2024 20:20:20.096 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints REST Application: http://localhost:8282/myapp                -> com.github.rzo1.MyApp@5b160208
+02-Apr-2024 20:20:20.098 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints      Service URI: http://localhost:8282/myapp/health         -> Pojo org.apache.tomee.microprofile.health.MicroProfileHealthChecksEndpoint
+02-Apr-2024 20:20:20.098 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/health         ->      Response getChecks()       
+02-Apr-2024 20:20:20.098 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/health/live    ->      Response getLiveChecks()   
+02-Apr-2024 20:20:20.098 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/health/ready   ->      Response getReadyChecks()  
+02-Apr-2024 20:20:20.098 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/health/started ->      Response getStartedChecks()
+02-Apr-2024 20:20:20.099 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints      Service URI: http://localhost:8282/myapp/myresource     -> Pojo com.github.rzo1.MyResource                                           
+02-Apr-2024 20:20:20.099 INFORMATION [main] org.apache.openejb.server.cxf.rs.CxfRsHttpListener.logEndpoints               GET http://localhost:8282/myapp/myresource     ->      Response test()
+02-
 ```
 
